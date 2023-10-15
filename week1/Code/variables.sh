@@ -1,3 +1,9 @@
+#!/bin/sh
+
+## Illustrates the use of variables 
+
+# Special variables
+
 echo "This script was called with $# parameters"
 echo "The script's name is $0"
 echo "The arguments are $@"

@@ -1,0 +1,27 @@
+#Count how many lines there are in each file
+(base) kundyn3237-34 fasta % wc -l 407228326.fasta
+(base) kun@dyn3237-34 fasta % wc -l 407228412.fasta
+(base) kun@dyn3237-34 fasta % wc -l E.coli.fasta
+
+#Print everything starting from the second line for the E. coli genome
+(base) kun@dyn3237-34 fasta % tail -n +2 E.coli.fasta
+
+#Count the sequence length of this genome
+(base) kun@dyn3237-34 fasta %  tail -n +2 E.coli.fasta |tr -d '\n'| wc -c
+
+#Count the matches of a particular sequence, 
+“ATGC” in the genome of E. coli (hint: Start by 
+removing the first line and removing newline characters)
+(base) kun@dyn3237-34 fasta % tail -n +2 E.coli.fasta | tr -d '\n' | grep -o 'ATGC' | wc -l
+
+#Compute the AT/GC ratio. That is, the (A+T)/(G+C) ratio (as a single number).
+This is a summary measure of base composition of double-stranded DNA. 
+DNA from different organisms and lineages has different ratios of the A-to-T and G-to-C base pairs (google “Chargaff’s rule”).
+For example, DNA from organisms that live in hot springs have a higher GC content, the GC base pair is more thermally stable.
+(base) kun@dyn3237-34 fasta % wc -l 407228412.fasta % a=$(tail -n +2 E.coli.fasta | tr -d '\n' | grep -o 'A' | wc -l) 
+(base) kun@dyn3237-34 fasta % wc -l 407228412.fasta % t=$(tail -n +2 E.coli.fasta | tr -d '\n' | grep -o 'T' | wc -l) 
+(base) kun@dyn3237-34 fasta % wc -l 407228412.fasta % g=$(tail -n +2 E.coli.fasta | tr -d '\n' | grep -o 'G' | wc -l) 
+(base) kun@dyn3237-34 fasta % wc -l 407228412.fasta % c=$(tail -n +2 E.coli.fasta | tr -d '\n' | grep -o 'C' | wc -l) 
+(base) kun@dyn3237-34 fasta % wc -l 407228412.fasta % at=`expr $a + $t` && gc=`expr $g + $c` 
+(base) kun@dyn3237-34 fasta % wc -l 407228412.fasta % outcome=$(echo "scale=4 ; $at/$gc" | bc ) 
+(base) kun@dyn3232-104 fasta % echo $outcome

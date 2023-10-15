@@ -6,19 +6,22 @@
 # Saves the output into a .csv file
 # Arguments: 1 -> tab delimited file
 # Date: Oct 2023
+
 if [ -z $1 ]
 then 
     echo 'notOK'
+    exit
 elif [ ! -f $1 ]
 then
     echo 'notOK'
-elif [ $1 != '*.tsv' ]
-then   
+    exit
+elif [ $1 != '*.csv']
+then
     echo 'notOK'
 else
-    echo "Creating a comma delimited version of $1 ..."
-    cat $1 | tr -s "\t" "," >> ../Results/$(basename $1).csv
+    echo 'OK'
+    echo "Creating a space delimited version of $1 ..."
+    cat $1 | tr  "," " " >>../Results/$(basename "$1" .csv).txt
     echo "Done!" 
-    echo 'OK'  
+    
 fi    
-exit
